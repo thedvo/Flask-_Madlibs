@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+{% block title %}Story Form{% endblock %}
+
+{% block content%}
+<h1>Madlibs</h1>
+
+<form action="/story">
+
+    <form action="/story">
+        {% for prompt in prompts %}
+        <div>{{prompt}}:
+            <input name="{{prompt}}" 
+        </div>
+            {% endfor %}
+            <button>Submit</button>
+    </form>
+
+{% endblock %}
+    <!-- <label for="place">place: </label>
+            <input type="text" name="place" id="place">
+    
+            <br>
+    
+            <label for="noun">noun: </label>
+            <input type="text" name="noun" id="place">
+    
+            <br>
+    
+            <label for="verb">verb: </label>
+            <input type="text" name="verb" id="place">
+    
+            <br>
+    
+            <label for="adjective">adjective: </label>
+            <input type="text" name="adjective" id="place">
+    
+            <br>
+            <label for="plural_noun">plural_noun: </label>
+            <input type="text" name="plural_noun" id="plural_noun">
+            <br>    
+    
+            <button>Submit</button>
+        </form>  -->
+

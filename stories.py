@@ -1,5 +1,13 @@
 """Madlibs Stories."""
 
+from flask import Flask, request, render_template
+from flask_debugtoolbar import DebugToolbarExtension
+
+stories = Flask(__name__)
+stories.config['SECRET_KEY'] = "secret"
+
+debug = DebugToolbarExtension(stories)
+
 
 class Story:
     """Madlibs story.
@@ -37,9 +45,39 @@ class Story:
 
 # Here's a story to get you started
 
-
 story = Story(
     ["place", "noun", "verb", "adjective", "plural_noun"],
     """Once upon a time in a long-ago {place}, there lived a
        large {adjective} {noun}. It loved to {verb} {plural_noun}."""
 )
+
+
+# @stories.route('/')
+# def show_form():
+#     return render_template('base.html')
+
+
+# @stories.route('/story')
+# def get_story():
+#     place = request.args.get('place')
+#     noun = request.args.get('noun')
+#     verb = request.args.get('verb')
+#     adjective = request.args.get('adjective')
+#     plural_noun = request.args.get('plural_noun')
+
+#     return render_template('story.html', place=place, noun=noun, verb=verb, adjective=adjective, plural_noun=plural_noun)
+
+
+@stories.route('/')
+def show_form():
+    prompts = story.prompts
+
+    return render_template('form.html', prompts=prompts)
+
+
+@stories.route('/story')
+def get_story():
+
+    text = story.generate(request.args)
+
+    return render_template('story.html', text=text)
